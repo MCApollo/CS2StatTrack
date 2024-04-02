@@ -1,45 +1,21 @@
-# CS2Fixes
+Dirty port of the following project
 
-CS2Fixes is a Metamod plugin with fixes and features aimed but not limited to zombie escape. This project also serves as a good example and help for source2mod and other developers.
+https://github.com/yourmnbbn/smext-IncrementStattrak.git
 
-## Installation
+This plugin defines the following command
 
-- Install [Metamod](https://cs2.poggu.me/metamod/installation/)
-- Download the [latest release package](https://github.com/Source2ZE/CS2Fixes/releases/latest) for your OS
-- Extract the package contents into `game/csgo` on your server
-- Configure the plugin cvars as desired in `cfg/cs2fixes/cs2fixes.cfg`, many features are disabled by default
-- OPTIONAL: If you want to setup admins, rename `admins.cfg.example` to `admins.cfg` which can be found in `addons/cs2fixes/configs` and follow the instructions within to add admins
+`CON_COMMAND_F(st_increment, "<listplayers -> player slot>, <uint64 -> itemID>, <int -> event type>, <int -> amount>", FCVAR_CLIENT_CAN_EXECUTE)`
 
-## Fixes and Features
-You can find the documentation of the fixes and features [here](../../wiki/Home).
-
-## Why is this all one plugin? Why "CS2Fixes"?
-
-Reimplementing all these features as standalone plugins would duplicate quite a lot of code between each. Metamod is not much more than a loader & hook manager, so many common modding features need a fair bit of boilerplate to work with. And since our primary goal is developing CS2Fixes for all zombie escape servers, there is not necessarily a drawback to distributing our work in this form at the moment.
-
-The CS2Fixes name comes from the CSSFixes and CSGOFixes projects, which were primarily aimed at low-level bug fixes and improvements for their respective games. Long term, we see this plugin slimming down and becoming more similar to them. Since as the CS2 modding scene matures, common things like an admin system and RTV become more feasible in source2mod or a similar modding platform.
-
-## Compilation
-
-### Requirements
-
-- [Metamod:Source](https://www.sourcemm.net/downloads.php/?branch=master) (build 1219 or higher)
-- [AMBuild](https://wiki.alliedmods.net/Ambuild)
-
-### Instructions
-
-Follow the instructions below to compile CS2Fixes.
-
-```bash
-git clone https://github.com/Source2ZE/CS2Fixes/ && cd CS2Fixes
-git submodule update --init --recursive
-
-export MMSOURCE112=/path/to/metamod/
-export HL2SDKCS2=/path/to/sdk/submodule
-
-mkdir build && cd build
-python3 ../configure.py --enable-optimize --symbol-files --sdks cs2
-ambuild
+```
+message CMsgIncrementKillCountAttribute {
+	optional fixed32 killer_account_id = 1;
+	optional fixed32 victim_account_id = 2;
+	optional uint64 item_id = 3;
+	optional uint32 event_type = 4;
+	optional uint32 amount = 5;
+}
 ```
 
-Copy the contents of package/ to your server's csgo/ directory.
+Usage example in game:
+`st_increment 3 424242424242 0 1000`
+

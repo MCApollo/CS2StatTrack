@@ -1,8 +1,8 @@
 # vim: set sts=2 ts=8 sw=2 tw=99 et ft=python:
 import os
 
-MMSPlugin.plugin_name = 'cs2fixes'
-MMSPlugin.plugin_alias = 'cs2fixes'
+MMSPlugin.plugin_name = 'cs2stattrack'
+MMSPlugin.plugin_alias = 'cs2stattrack'
 
 for sdk_target in MMSPlugin.sdk_targets:
   sdk = sdk_target.sdk
@@ -47,33 +47,10 @@ for sdk_target in MMSPlugin.sdk_targets:
 
 
   binary.sources += [
-    'src/cs2fixes.cpp',
-    'src/mempatch.cpp',
-    'src/patches.cpp',
-    'src/cvars.cpp',
-    'src/adminsystem.cpp',
-    'src/commands.cpp',
-    'src/addresses.cpp',
-    'src/detours.cpp',
-    'src/events.cpp',
-    'src/utils/entity.cpp',
-    'src/cs2_sdk/schema.cpp',
-    'src/ctimer.cpp',
-    'src/playermanager.cpp',
-    'src/gameconfig.cpp',
-    'src/gamesystem.cpp',
-    'src/votemanager.cpp',
-    'src/httpmanager.cpp',
-    'src/discord.cpp',
-    'src/map_votes.cpp',
-    'src/user_preferences.cpp',
-    'src/zombiereborn.cpp',
-    'src/customio.cpp',
-    'src/entitylistener.cpp',
-	'sdk/entity2/entitysystem.cpp',
-	'sdk/entity2/entityidentity.cpp',
-	'sdk/entity2/entitykeyvalues.cpp',
-	'sdk/tier1/keyvalues3.cpp',
+    'src/main.cpp',
+    'protobuf/generated/base_gcmessages_csgo.pb.cc',
+    'protobuf/generated/econ_gcmessages.pb.cc',
+    # 'src/cs2_sdk/schemasystem.cpp',
   ]
   
   protoc_builder = builder.tools.Protoc(protoc = sdk_target.protoc, sources = [
